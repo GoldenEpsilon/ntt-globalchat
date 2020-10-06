@@ -3,7 +3,7 @@ const http = require('http');
 var messages = [];
 var colors = [];
 var users = {};
-port = 3000;
+const port = process.env.PORT || 3000;
 const server = http.createServer((req, res) => {
 //START OF SERVER ACCESS CODE ///////////////////////////////////////////////////////////////////////
     if (req.method === 'POST') {
