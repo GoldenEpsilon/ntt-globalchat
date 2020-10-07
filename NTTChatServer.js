@@ -6,6 +6,11 @@ var users = {};
 const port = process.env.PORT || 3000;
 const server = http.createServer((req, res) => {
 //START OF SERVER ACCESS CODE ///////////////////////////////////////////////////////////////////////
+    if (req.method === 'GET') {
+	console.log("got a GET");
+	res.writeHead(200, {"Content-Type": "text/plain"});
+	res.end("END");
+    }
     if (req.method === 'POST') {
 		res.writeHead(200, {"Content-Type": "text/plain"});
 		for(var i = users[req.headers.name]; i < messages.length; i++){
