@@ -1,13 +1,17 @@
 
 const UsingDiscord = false;
 
-const Discord = require('discord.js')
 const http    = require('http')
-const config  = require('./config.json')
+if(UsingDiscord){
+	const Discord = require('discord.js')
+	const config  = require('./config.json')
+}
 const port    = process.env.PORT || 3000;
 
-const Client       = new Discord.Client()
-const logChannelId = ''
+if(UsingDiscord){
+	const Client       = new Discord.Client()
+	const logChannelId = ''
+}
 
 console.log("Loading up!");
 
@@ -25,8 +29,8 @@ const Server = http.createServer((req, res) => {
 	else if (req.method == 'POST') serverPost(req, res)
 })
 
-const lastIndexPerUser = {}
 const userPings        = {}
+const users            = {}
 const messages         = []
 const colors           = []
 
@@ -38,19 +42,29 @@ const disconnectTime   = 2000;
 function serverPost(req, res) {
 	res.writeHead(200, { 'Content-Type': 'text/plain' })
 
+	//set up new users and update pings
+	if(!users[req.headers.name]){
+		users[req.headers.name] = {ping : new Date().getTime(), messageIndex : 0, flavor : true};
+		messages.push({message : req.headers.name + ` has connected. (${Object.keys(users).length} total)`, col : "0"});
+	}else{
+		users[req.headers.name].ping = new Date().getTime()
+	}
+
 	//Send previous messages
-	if(lastIndexPerUser[req.headers.name]){
-		for (let i = lastIndexPerUser[req.headers.name]; i < messages.length; i++) {
-			res.write(m.message.replace(/	/gi, " "))
-			res.write('	')
-			res.write(m.col)
-			res.write('	')
+	if(users[req.headers.name] && users[req.headers.name].messageIndex > 0){
+		for (let i = users[req.headers.name].messageIndex; i < messages.length; i++) {
+			if(users[req.headers.name].flavor){
+				res.write(m.message.replace(/	/gi, " "))
+				res.write('	')
+				res.write(m.col)
+				res.write('	')
+			}
 		}
 	}
 
 	if (req.headers.message) {
 		if(req.headers.message == "!help"){
-			res.write("Server: Commands: !help !ping !list")
+			res.write("Server: Commands: !help !ping !list !flavor")
 			res.write('	')
 			res.write("0")
 			res.write('	')
@@ -59,10 +73,16 @@ function serverPost(req, res) {
 			res.write('	')
 			res.write("0")
 			res.write('	')
+		}else if(req.headers.message == "!flavor"){
+			users[req.headers.name].flavor = !users[req.headers.name].flavor;
+			res.write("Turned " + (users[req.headers.name].flavor ? "on" : "off") + " flavor messages")
+			res.write('	')
+			res.write("0")
+			res.write('	')
 		}else if(req.headers.message == "!list"){
 			res.write("Server: ");
 			var first = true;
-			for(const [key, value] of Object.entries(userPings)){
+			for(const [key, value] of Object.entries(users)){
 				if(!first){
 					res.write(", ");
 				}
@@ -87,18 +107,10 @@ function serverPost(req, res) {
 		}
 	}
 
-	lastIndexPerUser[req.headers.name] = messages.length
+	users[req.headers.name].messageIndex = messages.length
 
 	if (req.headers.message == '!online') {
 		messages.push({message : usersOnline + ' users connected.', col : "0"});
-	}
-
-	if (!userPings[req.headers.name]) {
-		userPings[req.headers.name] = new Date().getTime()
-
-		messages.push({message : req.headers.name + ` has connected. (${Object.keys(userPings).length} total)`, col : "0"});
-	} else {
-		userPings[req.headers.name] = new Date().getTime()
 	}
 
 	res.end('END')
@@ -106,11 +118,11 @@ function serverPost(req, res) {
 
 //Check for disconnects
 setInterval(() => {
-	for (const [key, value] of Object.entries(userPings)) {
+	for (const [key, value] of Object.entries(users.ping)) {
 		if (value < (new Date().getTime() - disconnectTime)) {
-			delete userPings[key]
+			delete users[key]
 			
-			messages.push({message : key + ` has disconnected. (${Object.keys(userPings).length} total)`, col : "0"});
+			messages.push({message : key + ` has disconnected. (${Object.keys(users).length} total)`, col : "0"});
 		}
 	}
 }, checkDisconnects)
