@@ -1,4 +1,6 @@
 
+console.log("Loading libraries...");
+
 const UsingDiscord = false;
 
 const http    = require('http')
@@ -13,7 +15,7 @@ if(UsingDiscord){
 	const logChannelId = config.channel;
 }
 
-console.log("Loading up!");
+console.log("Loading up server!");
 
 if(UsingDiscord){
 	//Discord startup
@@ -28,7 +30,6 @@ const Server = http.createServer((req, res) => {
 	if (req.method == 'POST') serverPost(req, res)
 })
 
-const userPings        = {}
 const users            = {}
 const messages         = []
 const colors           = []
@@ -117,7 +118,7 @@ function serverPost(req, res) {
 
 //Check for disconnects
 setInterval(() => {
-	for (const [key, value] of Object.entries(users.ping)) {
+	for (const [key, value] of Object.entries(users)) {
 		if (value < (new Date().getTime() - disconnectTime)) {
 			delete users[key]
 			
