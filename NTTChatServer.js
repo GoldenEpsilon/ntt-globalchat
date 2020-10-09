@@ -10,7 +10,7 @@ const port    = process.env.PORT || 3000;
 
 if(UsingDiscord){
 	const Client       = new Discord.Client()
-	const logChannelId = ''
+	const logChannelId = config.channel;
 }
 
 console.log("Loading up!");
@@ -25,8 +25,7 @@ if(UsingDiscord){
 
 //Server startup
 const Server = http.createServer((req, res) => {
-	if (req.method == 'GET') serverGet(req, res)
-	else if (req.method == 'POST') serverPost(req, res)
+	if (req.method == 'POST') serverPost(req, res)
 })
 
 const userPings        = {}
