@@ -20,8 +20,8 @@ const server = http.createServer((req, res) => {
 			res.write("	");
 		}
 		if(req.headers.message){
-			console.log(req.headers.name + ": " + req.headers.message);
-			messages.push(req.headers.name + ": " + req.headers.message);
+			console.log(req.headers.message);
+			messages.push(req.headers.name + " - " + req.headers.message);
 			if(req.headers.color){
 				colors.push(req.headers.color);
 			}else{
