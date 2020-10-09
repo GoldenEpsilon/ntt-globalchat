@@ -86,7 +86,7 @@ function serverPost(req, res) {
 				if(!first){
 					res.write(", ");
 				}
-				res.write(key(/	/gi, " "));
+				res.write(key.replace(/	/gi, " "));
 				first = false;
 			}
 			res.write('	')
