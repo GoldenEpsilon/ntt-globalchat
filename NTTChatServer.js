@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
     if (req.method === 'GET') {
 	console.log("got a GET");
 	res.writeHead(200, {"Content-Type": "text/plain"});
-	res.end("END");
+	res.end("What are you doing here?");
     }
     if (req.method === 'POST') {
 		res.writeHead(200, {"Content-Type": "text/plain"});
