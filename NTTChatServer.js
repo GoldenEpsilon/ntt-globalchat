@@ -53,29 +53,21 @@ function serverPost(req, res) {
 	//Send previous messages
 	if(users[req.headers.name] && users[req.headers.name].messageIndex > 0){
 		for (let i = users[req.headers.name].messageIndex; i < messages.length; i++) {
-			if(users[req.headers.name].flavor){
-				res.write(m.message.replace(/	/gi, " "))
-				res.write('	')
-				res.write(m.col)
-				res.write('	')
-			}
+			res.write(m.message.replace(/	/gi, " "))
+			res.write('	')
+			res.write(m.col)
+			res.write('	')
 		}
 	}
 
 	if (req.headers.message) {
 		if(req.headers.message == "!help"){
-			res.write("Server: Commands: !help !ping !list !flavor")
+			res.write("Server: Commands: !help !ping !list")
 			res.write('	')
 			res.write("0")
 			res.write('	')
 		}else if(req.headers.message == "!ping"){
 			res.write("Server: Pong")
-			res.write('	')
-			res.write("0")
-			res.write('	')
-		}else if(req.headers.message == "!flavor"){
-			users[req.headers.name].flavor = !users[req.headers.name].flavor;
-			res.write("Turned " + (users[req.headers.name].flavor ? "on" : "off") + " flavor messages")
 			res.write('	')
 			res.write("0")
 			res.write('	')
