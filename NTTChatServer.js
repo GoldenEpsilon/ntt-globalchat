@@ -11,7 +11,7 @@ const port    = process.env.PORT || 3000;
 
 if(UsingDiscord){
 	const Client       = new Discord.Client()
-	const logChannelId = "CHANNEL";
+	const logChannelId = "764565200753917963";
 }
 
 console.log("Loading up server!");
@@ -136,7 +136,7 @@ if(UsingDiscord){
 
 if(UsingDiscord){
 	//Log in discord client
-	Client.login("TOKEN")
+	Client.login("NzY0NTY0NzkxNzkxNzE0MzM0.X4IGcw.es3GwUB7BRkQMWwlN7JGDMQ4qek")
 }
 
 console.log("Finished loading!");
