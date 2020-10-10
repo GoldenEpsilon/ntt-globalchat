@@ -55,10 +55,12 @@ function serverPost(req, res) {
 	//Send previous messages
 	if(users[req.headers.name] && users[req.headers.name].messageIndex > 0){
 		for (let i = users[req.headers.name].messageIndex; i < messages.length; i++) {
-			res.write(messages[i].message.replace(/	/gi, " "))
-			res.write('	')
-			res.write(messages[i].col)
-			res.write('	')
+			if(messages[i]){
+				res.write(messages[i].message.replace(/	/gi, " "))
+				res.write('	')
+				res.write(messages[i].col)
+				res.write('	')
+			}
 		}
 	}
 
