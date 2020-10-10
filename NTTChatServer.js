@@ -4,16 +4,17 @@ console.log("Loading libraries...");
 const UsingDiscord = true;
 
 const http    = require('http');
-var Discord
+var Discord;
 if(UsingDiscord){
     Discord = require('discord.js')
 }
 
 const port    = process.env.PORT || 3000;
-
+var Client;
+var logChannelId;
 if(UsingDiscord){
-	const Client       = new Discord.Client({ disableMentions: 'everyone' })
-	const logChannelId = "<764565200753917963>";
+	Client       = new Discord.Client({ disableMentions: 'everyone' })
+	logChannelId = "<764565200753917963>";
 }
 
 console.log("Loading up server!");
