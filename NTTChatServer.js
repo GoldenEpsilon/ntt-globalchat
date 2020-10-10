@@ -3,15 +3,16 @@ console.log("Loading libraries...");
 
 const UsingDiscord = true;
 
-const http    = require('http')
+const http    = require('http');
+const Discord;
 if(UsingDiscord){
-	const Discord = require('discord.js')
+	Discord = require('discord.js')
 }
 const port    = process.env.PORT || 3000;
 
 if(UsingDiscord){
 	const Client       = new Discord.Client({ disableMentions: 'everyone' })
-	//const logChannelId = "<764565200753917963>";
+	const logChannelId = "<764565200753917963>";
 }
 
 console.log("Loading up server!");
@@ -122,16 +123,16 @@ Server.listen(port)
 console.log('Server started on port', port)
 
 if(UsingDiscord){
-	//Recieved Discord message
-	//Client.on('message', message => {
-	//	if (message.channel.id != logChannelId) return
-	//	if (message.author.bot) return
+	Recieved Discord message
+	Client.on('message', message => {
+		if (message.channel.id != logChannelId) return
+		if (message.author.bot) return
 
-	//	if (message.content) {
-	//		messages.push('[Discord] ' + message.author.username + ': ' + message.content)
-	//		colors.push(discordColor)
-	//	}
-	//})
+		if (message.content) {
+			messages.push('[Discord] ' + message.author.username + ': ' + message.content)
+			colors.push(discordColor)
+		}
+	})
 }
 
 if(UsingDiscord){
