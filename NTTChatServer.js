@@ -11,7 +11,7 @@ const port    = process.env.PORT || 3000;
 
 if(UsingDiscord){
 	const Client       = new Discord.Client()
-	const logChannelId = "764565200753917963";
+	const logChannelId = "<764565200753917963>";
 }
 
 console.log("Loading up server!");
