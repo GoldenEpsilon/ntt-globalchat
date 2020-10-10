@@ -23,7 +23,7 @@ if(UsingDiscord){
 	//Discord startup
 	Client.once('ready', () => {
 		console.log('Logged in as ' + Client.user.tag + '!')
-		//Client.logChannel = Client.channels.cache.get(logChannelId)
+		Client.logChannel = Client.channels.cache.get(logChannelId)
 	})
 }
 
