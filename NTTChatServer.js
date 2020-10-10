@@ -4,10 +4,8 @@ console.log("Loading libraries...");
 const UsingDiscord = true;
 
 const http    = require('http');
-var Discord;
-if(UsingDiscord){
-	Discord = require('discord.js')
-}
+const Discord = require('discord.js')
+
 const port    = process.env.PORT || 3000;
 
 if(UsingDiscord){
