@@ -4,7 +4,7 @@ console.log("Loading libraries...");
 const UsingDiscord = true;
 
 const http    = require('http');
-const Discord;
+var Discord;
 if(UsingDiscord){
 	Discord = require('discord.js')
 }
