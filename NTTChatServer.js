@@ -36,7 +36,7 @@ const users            = {}
 const messages         = []
 const colors           = []
 
-const discordColor     = '16753976'
+const discordColor     = '14322034'
 const checkDisconnects = 3000;
 const disconnectTime   = 2000;
 
