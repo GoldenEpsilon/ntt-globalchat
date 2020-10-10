@@ -8,6 +8,7 @@
     "start": "node NTTChatServer.js"
   },
   "dependencies": {
+    "node": "^12",
     "discord.js": "^12.3.0"
   }
 }
