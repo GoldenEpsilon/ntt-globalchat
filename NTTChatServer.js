@@ -14,7 +14,7 @@ var Client;
 var logChannelId;
 if(UsingDiscord){
 	Client       = new Discord.Client({ disableMentions: 'everyone' })
-	logChannelId = "<764565200753917963>";
+	logChannelId = "764565200753917963";
 }
 
 console.log("Loading up server!");
