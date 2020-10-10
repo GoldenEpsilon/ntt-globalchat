@@ -10,8 +10,8 @@ if(UsingDiscord){
 const port    = process.env.PORT || 3000;
 
 if(UsingDiscord){
-	const Client       = new Discord.Client()
-	const logChannelId = "<764565200753917963>";
+	const Client       = new Discord.Client({ disableMentions: 'everyone' })
+	//const logChannelId = "<764565200753917963>";
 }
 
 console.log("Loading up server!");
@@ -20,7 +20,7 @@ if(UsingDiscord){
 	//Discord startup
 	Client.once('ready', () => {
 		console.log('Logged in as ' + Client.user.tag + '!')
-		Client.logChannel = Client.channels.cache.get(logChannelId)
+		//Client.logChannel = Client.channels.cache.get(logChannelId)
 	})
 }
 
@@ -123,15 +123,15 @@ console.log('Server started on port', port)
 
 if(UsingDiscord){
 	//Recieved Discord message
-	Client.on('message', message => {
-		if (message.channel.id != logChannelId) return
-		if (message.author.bot) return
+	//Client.on('message', message => {
+	//	if (message.channel.id != logChannelId) return
+	//	if (message.author.bot) return
 
-		if (message.content) {
-			messages.push('[Discord] ' + message.author.username + ': ' + message.content)
-			colors.push(discordColor)
-		}
-	})
+	//	if (message.content) {
+	//		messages.push('[Discord] ' + message.author.username + ': ' + message.content)
+	//		colors.push(discordColor)
+	//	}
+	//})
 }
 
 if(UsingDiscord){
