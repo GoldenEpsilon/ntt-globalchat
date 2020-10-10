@@ -1,18 +1,17 @@
 
 console.log("Loading libraries...");
 
-const UsingDiscord = false;
+const UsingDiscord = true;
 
 const http    = require('http')
 if(UsingDiscord){
 	const Discord = require('discord.js')
-	const config  = require('./config.json')
 }
 const port    = process.env.PORT || 3000;
 
 if(UsingDiscord){
 	const Client       = new Discord.Client()
-	const logChannelId = config.channel;
+	const logChannelId = "CHANNEL";
 }
 
 console.log("Loading up server!");
@@ -137,7 +136,7 @@ if(UsingDiscord){
 
 if(UsingDiscord){
 	//Log in discord client
-	Client.login(config.token)
+	Client.login("TOKEN")
 }
 
 console.log("Finished loading!");
