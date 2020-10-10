@@ -4,7 +4,10 @@ console.log("Loading libraries...");
 const UsingDiscord = true;
 
 const http    = require('http');
-const Discord = require('discord.js')
+var Discord
+if(UsingDiscord){
+    Discord = require('discord.js')
+}
 
 const port    = process.env.PORT || 3000;
 
@@ -121,7 +124,7 @@ Server.listen(port)
 console.log('Server started on port', port)
 
 if(UsingDiscord){
-	Recieved Discord message
+	//Recieved Discord message
 	Client.on('message', message => {
 		if (message.channel.id != logChannelId) return
 		if (message.author.bot) return
