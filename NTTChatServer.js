@@ -133,7 +133,7 @@ if(UsingDiscord){
 		if (message.author.bot) return
 
 		if (message.content) {
-			messages.push({message : '[Discord] ' + message.author.username + ': ' + message.content + (message.attachments.length > 0) ? " <attachment>" : "", col : discordColor})
+			messages.push({message : '[Discord] ' + message.author.username + ': ' + message.content + ((message.attachments.length > 0) ? " <attachment>" : ""), col : discordColor})
 			colors.push(discordColor)
 		}
 	})
