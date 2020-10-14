@@ -14,7 +14,7 @@ var Client;
 var logChannelId;
 if(UsingDiscord){
 	Client       = new Discord.Client({ disableMentions: 'everyone' })
-	logChannelId = "765216141974437898";
+	logChannelId = "765740608471957526";
 }
 
 console.log("Loading up server!");
@@ -133,7 +133,7 @@ if(UsingDiscord){
 		if (message.author.bot) return
 
 		if (message.content) {
-			messages.push({message : '[Discord] ' + message.author.username + ': ' + message.content, col : discordColor})
+			messages.push({message : '[Discord] ' + message.author.username + ': ' + message.content + (message.attachments.length > 0) ? " <attachment>" : "", col : discordColor})
 			colors.push(discordColor)
 		}
 	})
