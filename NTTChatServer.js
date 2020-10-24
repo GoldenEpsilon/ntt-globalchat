@@ -48,6 +48,10 @@ function serverPost(req, res) {
 	if(!users[req.headers.name]){
 		users[req.headers.name] = {ping : new Date().getTime(), messageIndex : 0, flavor : true};
 		messages.push({message : req.headers.name + ` has connected. (${Object.keys(users).length} total)`, col : "0"});
+
+		if(UsingDiscord){
+			Client.logChannel.send((req.headers.name + ` has connected. (${Object.keys(users).length} total)`).replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
+		}
 	}else{
 		users[req.headers.name].ping = new Date().getTime()
 	}
@@ -119,6 +123,10 @@ setInterval(() => {
 			delete users[key]
 			
 			messages.push({message : key + ` has disconnected. (${Object.keys(users).length} total)`, col : "0"});
+			
+			if(UsingDiscord){
+				Client.logChannel.send((key + ` has disconnected. (${Object.keys(users).length} total)`).replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
+			}
 		}
 	}
 }, checkDisconnects)
