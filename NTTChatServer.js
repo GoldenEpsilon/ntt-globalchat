@@ -98,7 +98,7 @@ function serverPost(req, res) {
 			console.log(req.headers.name + ': ' + req.headers.message);
 
 			if(UsingDiscord){
-				Client.logChannel.send("``" + req.headers.message.replace(":", "``:").replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
+				Client.logChannel.send(req.headers.message.replace(req.headers.name, "``"+req.headers.name+"``").replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
 			}
 
 			if (req.headers.color) m.col = req.headers.color;
