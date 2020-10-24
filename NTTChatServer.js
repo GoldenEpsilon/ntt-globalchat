@@ -141,11 +141,11 @@ if(UsingDiscord){
 		if (message.author.bot) return
 
 		if (message.content) {
-			if(req.headers.message == "!help"){
+			if(message.content == "!help"){
 				Client.logChannel.send("``Server``: Commands: !help !ping !list")
-			}else if(req.headers.message == "!ping"){
+			}else if(message.content == "!ping"){
 				Client.logChannel.send("``Server``: Pong")
-			}else if(req.headers.message == "!list"){
+			}else if(message.content == "!list"){
 				let s = "``Server``: ";
 				let first = true;
 				for(const [key, value] of Object.entries(users)){
