@@ -50,7 +50,7 @@ function serverPost(req, res) {
 		messages.push({message : req.headers.name + ` has connected. (${Object.keys(users).length} total)`, col : "0"});
 
 		if(UsingDiscord){
-			Client.logChannel.send((req.headers.name + ` has connected. (${Object.keys(users).length} total)`).replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
+			Client.logChannel.send(("``" + req.headers.name + "``" + ` has connected. (${Object.keys(users).length} total)`).replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
 		}
 	}else{
 		users[req.headers.name].ping = new Date().getTime()
@@ -98,7 +98,7 @@ function serverPost(req, res) {
 			console.log(req.headers.name + ': ' + req.headers.message);
 
 			if(UsingDiscord){
-				Client.logChannel.send(req.headers.message.replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
+				Client.logChannel.send("``" + req.headers.message.replace(":", "``:").replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
 			}
 
 			if (req.headers.color) m.col = req.headers.color;
@@ -125,7 +125,7 @@ setInterval(() => {
 			messages.push({message : key + ` has disconnected. (${Object.keys(users).length} total)`, col : "0"});
 			
 			if(UsingDiscord){
-				Client.logChannel.send((key + ` has disconnected. (${Object.keys(users).length} total)`).replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
+				Client.logChannel.send(("``" + key + "``" + ` has disconnected. (${Object.keys(users).length} total)`).replace(/@everyone/gi, "@ everyone").replace(/<@/gi, "<@ "))
 			}
 		}
 	}
