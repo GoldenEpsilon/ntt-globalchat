@@ -81,7 +81,7 @@ function serverPost(req, res) {
 			res.write('	')
 		}else if(req.headers.message == "!list"){
 			res.write("Server: ");
-			var first = true;
+			let first = true;
 			for(const [key, value] of Object.entries(users)){
 				if(!first){
 					res.write(", ");
@@ -141,8 +141,25 @@ if(UsingDiscord){
 		if (message.author.bot) return
 
 		if (message.content) {
-			messages.push({message : '[Discord] ' + message.author.username + ': ' + message.content + ((message.attachments.length > 0) ? " <attachment>" : ""), col : discordColor})
-			colors.push(discordColor)
+			if(req.headers.message == "!help"){
+				Client.logChannel.send("``Server``: Commands: !help !ping !list")
+			}else if(req.headers.message == "!ping"){
+				Client.logChannel.send("``Server``: Pong")
+			}else if(req.headers.message == "!list"){
+				let s = "``Server``: ";
+				let first = true;
+				for(const [key, value] of Object.entries(users)){
+					if(!first){
+						s += ", ";
+					}
+					s += key.replace(/	/gi, " ");
+					first = false;
+				}
+				Client.logChannel.send(s)
+			}else{
+				messages.push({message : '[Discord] ' + message.author.username + ': ' + message.content + ((message.attachments.length > 0) ? " <attachment>" : ""), col : discordColor})
+				colors.push(discordColor)
+			}
 		}
 	})
 }
