@@ -119,7 +119,7 @@ function serverPost(req, res) {
 //Check for disconnects
 setInterval(() => {
 	for (const [key, value] of Object.entries(users)) {
-		if (value + disconnectTime < new Date().getTime()) {
+		if (value.ping + disconnectTime < new Date().getTime()) {
 			delete users[key]
 			
 			messages.push({message : key + ` has disconnected. (${Object.keys(users).length} total)`, col : "0"});
