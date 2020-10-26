@@ -37,8 +37,8 @@ const messages         = []
 const colors           = []
 
 const discordColor     = '14322034'
-const checkDisconnects = 3000;
-const disconnectTime   = 2000;
+const checkDisconnects = 5000;
+const disconnectTime   = 30000;
 
 //Recieved NTT message
 function serverPost(req, res) {
