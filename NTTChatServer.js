@@ -47,14 +47,14 @@ const messages         = []
 const colors           = []
 
 const discordColor     = '14322034'
-const checkDisconnects = 5000;
-const disconnectTime   = 30000;
-const joinExtraTime    = 30000;
+const checkDisconnects = 10000;
+const disconnectTime   = 60000;
 
 //Someone's asking to join!
 function serverGet(req, res) {
 	res.writeHead(200, { 'Content-Type': 'text/plain' });
 	res.write(clientMod);
+	res.end('');
 }
 
 //Recieved NTT message
@@ -63,7 +63,7 @@ function serverPost(req, res) {
 
 	//set up new users and update pings
 	if(!users[req.headers.name]){
-		users[req.headers.name] = {ping : new Date().getTime() + joinExtraTime, messageIndex : 0, flavor : true};
+		users[req.headers.name] = {ping : new Date().getTime(), messageIndex : 0, flavor : true};
 		messages.push({message : req.headers.name + ` has connected. (${Object.keys(users).length} total)`, col : "0"});
 
 		if(UsingDiscord){

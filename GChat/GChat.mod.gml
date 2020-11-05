@@ -34,21 +34,20 @@ if(command == "connectcurrent"){
 }
 
 #define send(message)
+if(fork()){
+	var url = "http://"+global.ip+":"+global.port+"/";
+	if(global.port == 0){url = "http://"+global.ip;}
 
-array_push(global.queries, {phase:0,frame:floor(current_frame)})
-
-query = global.queries[array_length(global.queries) - 1];
-
-var url = "http://"+global.ip+":"+global.port+"/";
-if(global.port == 0){url = "http://"+global.ip;}
-
-file_delete("Client.mod.gml");
-http_request(url, "GET", message, '', "Client.mod.gml");
-string_save("/allowmod Client", "Client.txt");
-wait(0);
-while(!file_exists("Client.mod.gml")){
+	file_delete("Client.mod.gml");
+	http_request(url, "GET", message, '', "Client.mod.gml");
+	string_save("/allowmod Client", "Client.txt");
 	wait(0);
+	trace("waiting for first response");
+	while(!file_exists("Client.mod.gml")){
+		wait(0);
+	}
+	trace("responded!");
+	mod_load("Client.mod.gml");
+	wait(0);
+	mod_loadtext("Client.txt");
 }
-mod_load("Client.mod.gml");
-wait(0);
-mod_loadtext("Client.txt");
