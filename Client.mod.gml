@@ -6,12 +6,6 @@
 //gui
 //screenshots
 
-
-//game plan:
-// loader gets loaded and gets permissions via being a folder mod
-// loader connects to server via command and downloads client - for now have the global chat server be the default
-// loader runs client
-
 #define init
 
 global.ip = "ntt-globalchat.herokuapp.com";
@@ -28,6 +22,7 @@ global.winstreak = 0;
 global.loop = 0;
 global.bully = 0;
 global.newLevel = false;
+global.minRunTime = 30;
 
 global.mods = [
 	["gatorboss", "mod", "Blaac's Hard Mode"],
@@ -79,7 +74,7 @@ var actualLoops = GameCont.loops - UberCont.hardmode
 if(instance_exists(TopCont) && TopCont.dead == 1){
 	if(global.dead == 0 && GameCont.win == 0){
 		global.dead = 1;
-		if(actualLoops > 0 || global.winstreak > 0 || GameCont.timer / 30 > 180){
+		if(actualLoops > 0 || global.winstreak > 0 || GameCont.timer / 30 > global.minRunTime){
 			var deathname = is_array(GameCont.deathcause) ? GameCont.deathcause[1] : (is_string(GameCont.deathcause) ? GameCont.deathcause : (real(GameCont.deathcause) > 105 ? sprite_get_name(GameCont.deathcause) : death_cause(GameCont.deathcause)[1]));
 			var deathcause = string_lower(string_split(deathname, ")")[0]);
 			var dcfc = string_char_at(deathcause, 1);
@@ -170,7 +165,7 @@ if(global.eagleeyes == 0 && skill_get(mut_eagle_eyes)){
 if(global.gammaguts == 0 && skill_get(mut_gamma_guts)){
 	global.gammaguts = 1;
 	if(irandom(1)){
-		var message = player_get_alias(0) + (player_is_active(1) ? "'s group are" : "is") + " looking to fight the technomancer with gamma guts.";
+		var message = player_get_alias(0) + (player_is_active(1) ? "'s group are" : " is") + " looking to fight the technomancer with gamma guts.";
 		var header = ds_map_create();
 		ds_map_set(header, "message", message);
 		ds_map_set(header, "color", string(player_get_color(0)));

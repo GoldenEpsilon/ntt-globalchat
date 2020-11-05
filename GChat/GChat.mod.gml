@@ -40,14 +40,11 @@ if(fork()){
 
 	file_delete("Client.mod.gml");
 	http_request(url, "GET", message, '', "Client.mod.gml");
-	string_save("/allowmod Client", "Client.txt");
 	wait(0);
 	trace("waiting for first response");
 	while(!file_exists("Client.mod.gml")){
 		wait(0);
 	}
 	trace("responded!");
-	mod_load("Client.mod.gml");
-	wait(0);
-	mod_loadtext("Client.txt");
+	mod_load("data/gchat.mod/Client.mod.gml");
 }
