@@ -4,6 +4,15 @@ console.log("Loading libraries...");
 const UsingDiscord = true;
 
 const http    = require('http');
+const fs = require('fs');
+var clientMod = "";
+fs.readFile('Client.mod.gml', 'utf8' , (err, data) => {
+	if (err) {
+		console.error(err);
+		return;
+	}
+	clientMod = data;
+})
 var Discord;
 if(UsingDiscord){
     Discord = require('discord.js')
@@ -30,6 +39,7 @@ if(UsingDiscord){
 //Server startup
 const Server = http.createServer((req, res) => {
 	if (req.method == 'POST') serverPost(req, res)
+	if (req.method == 'GET') serverGet(req, res)
 })
 
 const users            = {}
@@ -40,6 +50,12 @@ const discordColor     = '14322034'
 const checkDisconnects = 5000;
 const disconnectTime   = 30000;
 const joinExtraTime    = 30000;
+
+//Someone's asking to join!
+function serverGet(req, res) {
+	res.writeHead(200, { 'Content-Type': 'text/plain' });
+	res.write(clientMod);
+}
 
 //Recieved NTT message
 function serverPost(req, res) {

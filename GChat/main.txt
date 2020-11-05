@@ -1,0 +1,2 @@
+/loadmod GChat
+/loadtext main2
