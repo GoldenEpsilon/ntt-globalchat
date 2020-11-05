@@ -93,12 +93,8 @@ if(instance_exists(TopCont) && TopCont.dead == 1){
 				}
 				message += modlist[i];
 			}
-			message += "." + (global.winstreak > 0 ? " They had a " + string(global.winstreak) + " long winstreak." : "");
-			var header = ds_map_create();
-			ds_map_set(header, "message", message);
-			ds_map_set(header, "color", string(player_get_color(0)));
-			trace_color(message, player_get_color(0));
-			send(header);
+			message += (array_length(modlist) > 0 ? " enabled" : "") + "." + (global.winstreak > 0 ? " They had a " + string(global.winstreak) + " long winstreak." : "");
+			sendMessage(message);
 		}
 		global.winstreak = 0;
 	}
@@ -108,80 +104,56 @@ if(GameCont.win == 1 && !global.winstreakadded){
 	global.winstreak++;
 	if(global.winstreak > 2){
 		var message = player_get_alias(0) + (player_is_active(1) ? "'s group" : "") + " has a " + string(global.winstreak) + " winstreak!";
-		var header = ds_map_create();
-		ds_map_set(header, "message", message);
-		ds_map_set(header, "color", string(player_get_color(0)));
-		trace_color(message, player_get_color(0));
-		send(header);
+		sendMessage(message);
 	}
 }
 if(actualLoops > global.loop){
 	global.loop = actualLoops;
-	if(actualLoops == 2){
+	if(actualLoops == 1){
+		var message = player_get_alias(0) + (player_is_active(1) ? "'s group" : "") + " is getting into loop 1!";
+		sendMessage(message);
+	}else if(actualLoops == 2){
 		var message = player_get_alias(0) + (player_is_active(1) ? "'s group" : "") + " is going on to loop 2!";
-		var header = ds_map_create();
-		ds_map_set(header, "message", message);
-		ds_map_set(header, "color", string(player_get_color(0)));
-		trace_color(message, player_get_color(0));
-		send(header);
+		sendMessage(message);
 	}else if(actualLoops == 3){
 		var message = player_get_alias(0) + (player_is_active(1) ? "'s group" : "") + " better watch out for those freaks...";
-		var header = ds_map_create();
-		ds_map_set(header, "message", message);
-		ds_map_set(header, "color", string(player_get_color(0)));
-		trace_color(message, player_get_color(0));
-		send(header);
+		sendMessage(message);
 	}else if(actualLoops > 3){
 		var message = player_get_alias(0) + (player_is_active(1) ? "'s group" : "") + " reached loop " + string(actualLoops) + "!";
-		var header = ds_map_create();
-		ds_map_set(header, "message", message);
-		ds_map_set(header, "color", string(player_get_color(0)));
-		trace_color(message, player_get_color(0));
-		send(header);
+		sendMessage(message);
 	}
 }
 if(global.openmind == 0 && skill_get(mut_open_mind)){
 	global.openmind = 1;
 	if(irandom(1)){
 		var message = player_get_alias(0) + (player_is_active(1) ? "'s group" : "") + " opened their mind" + (player_is_active(1) ? "s" : "") + " 0_o";
-		var header = ds_map_create();
-		ds_map_set(header, "message", message);
-		ds_map_set(header, "color", string(player_get_color(0)));
-		trace_color(message, player_get_color(0));
-		send(header);
+		sendMessage(message);
 	}
 }
 if(global.eagleeyes == 0 && skill_get(mut_eagle_eyes)){
 	global.eagleeyes = 1;
 	if(irandom(1)){
 		var message = player_get_alias(0) + (player_is_active(1) ? "'s group" : "") + " can see good.";
-		var header = ds_map_create();
-		ds_map_set(header, "message", message);
-		ds_map_set(header, "color", string(player_get_color(0)));
-		trace_color(message, player_get_color(0));
-		send(header);
+		sendMessage(message);
 	}
 }
 if(global.gammaguts == 0 && skill_get(mut_gamma_guts)){
 	global.gammaguts = 1;
 	if(irandom(1)){
 		var message = player_get_alias(0) + (player_is_active(1) ? "'s group are" : " is") + " looking to fight the technomancer with gamma guts.";
-		var header = ds_map_create();
-		ds_map_set(header, "message", message);
-		ds_map_set(header, "color", string(player_get_color(0)));
-		trace_color(message, player_get_color(0));
-		send(header);
+		sendMessage(message);
 	}
+}
+if(global.gammaguts == 1 && skill_get(mut_gamma_guts) && instance_exists(TechnoMancer)){
+	global.gammaguts = 2;
+	var message = player_get_alias(0) + (player_is_active(1) ? "'s group are" : " is") + " fighting the technomancer with gamma guts.";
+	sendMessage(message);
 }
 with(Player) {
 	if((wep == wep_super_plasma_cannon && bwep == wep_ultra_shovel) || (bwep == wep_super_plasma_cannon && wep == wep_ultra_shovel)){
 		if(global.meta == 0){
 			var message = player_get_alias(index) + " has meta!";
-			var header = ds_map_create();
-			ds_map_set(header, "message", message);
-			ds_map_set(header, "color", string(player_get_color(index)));
-			trace_color(message, player_get_color(index));
-			send(header);
+			sendMessage(message, index);
 		}
 		global.meta = 2;
 	}
@@ -190,11 +162,7 @@ with(YungCuz){
 	if(sprite_index == sprCuzCry && global.bully == 0){
 		global.bully = 1;
 		var message = player_get_alias(0) + (player_is_active(1) ? "'s group" : "") + (player_is_active(1) ? " are bullies!" : " is a bully!");
-		var header = ds_map_create();
-		ds_map_set(header, "message", message);
-		ds_map_set(header, "color", string(player_get_color(0)));
-		trace_color(message, player_get_color(0));
-		send(header);
+		sendMessage(message);
 	}
 }
 
@@ -241,6 +209,14 @@ for(var i = 0; i < array_length(arr); i++){
 }
 return 0;
 
+//argument0:message, argument1:player
+#define sendMessage
+var header = ds_map_create();
+ds_map_set(header, "message", argument0);
+ds_map_set(header, "color", string(player_get_color(argument_count > 1 ? argument1 : 0)));
+trace_color(message, player_get_color(argument_count > 1 ? argument1 : 0));
+send(header);
+
 
 #define sendcheck
 
@@ -272,6 +248,7 @@ for(var i = 0; i < array_length(global.queries); i++){
 			break;
 	}
 }
+	
 
 #define send(message)
 
