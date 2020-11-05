@@ -212,9 +212,9 @@ return 0;
 //argument0:message, argument1:player
 #define sendMessage
 var header = ds_map_create();
-ds_map_set(header, "message", argument0);
-ds_map_set(header, "color", string(player_get_color(argument_count > 1 ? argument1 : 0)));
-trace_color(message, player_get_color(argument_count > 1 ? argument1 : 0));
+ds_map_set(header, "message", argument[0]);
+ds_map_set(header, "color", string(player_get_color(argument_count > 1 ? argument[1] : 0)));
+trace_color(message, player_get_color(argument_count > 1 ? argument[1] : 0));
 send(header);
 
 
