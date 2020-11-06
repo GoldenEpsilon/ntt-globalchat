@@ -6,7 +6,7 @@
 //gui
 //screenshots
 
-#macro version 2.51
+#macro version 2.6
 
 #define init
 
