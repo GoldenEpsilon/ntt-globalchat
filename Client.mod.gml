@@ -6,7 +6,7 @@
 //gui
 //screenshots
 
-#macro version 2.4
+#macro version 2.5
 
 #define init
 
@@ -34,7 +34,11 @@ global.mods = [
 	["popo", "mod", "Popo"],
 	["vagabonds_master", "mod", "Vagabonds"],
 	["itemlib", "mod", "Risk of Acid Rain"],
-	["NT3D", "mod", "NT3D"]
+	["NT3D", "mod", "NT3D"],
+	["super hot", "mod", "SUPER HOT"],
+	["nts", "mod", "Nuclear Throne Stupid"],
+	["diceywastelands", "mod", "Dicey Wastelands"],
+	["pvp", "mod", "PvP"]
 ]
 
 chat_comp_add("gcip", "Sets your ip for the global chat.");
@@ -286,6 +290,12 @@ if(!file_loaded("update"+string(query.frame)+".txt")){
 }
 
 #define send3(query)
+
+if(!file_loaded("update"+string(query.frame)+".txt")){
+	file_load("update"+string(query.frame)+".txt");
+	query.phase = 2;
+	return;
+}
 
 s = string_load("update"+string(query.frame)+".txt");
 
