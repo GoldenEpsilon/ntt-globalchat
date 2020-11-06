@@ -5,8 +5,9 @@
 //if it gets worse, voteipban that also tempbans (painful to make)
 //gui
 //screenshots
+//emotes
 
-#macro version 2.6
+#macro version 2.7
 
 #define init
 
@@ -78,7 +79,7 @@ sendcheck();
 
 var actualLoops = GameCont.loops - UberCont.hardmode
 
-if(instance_exists(TopCont) && TopCont.dead == 1){
+if(instance_exists(TopCont) && !instance_exists(Menu) && !instance_exists(Player)){
 	if(global.dead == 0 && GameCont.win == 0){
 		global.dead = 1;
 		if(actualLoops > 0 || global.winstreak > 0 || GameCont.timer / 30 > global.minRunTime){
