@@ -6,7 +6,7 @@
 //gui
 //screenshots
 
-#macro version 2.5
+#macro version 2.51
 
 #define init
 
@@ -43,7 +43,7 @@ global.mods = [
 
 chat_comp_add("gcip", "Sets your ip for the global chat.");
 chat_comp_add("gcport", "Sets your port for the global chat.");
-trace("Version "+version);
+trace("Version "+string(version));
 trace("Welcome to the official NTT Global Chat server! type !help for a list of commands");
 
 
