@@ -6,6 +6,8 @@
 //gui
 //screenshots
 
+#macro version 2.4
+
 #define init
 
 global.ip = "ntt-globalchat.herokuapp.com";
@@ -37,6 +39,7 @@ global.mods = [
 
 chat_comp_add("gcip", "Sets your ip for the global chat.");
 chat_comp_add("gcport", "Sets your port for the global chat.");
+trace("Version "+version);
 trace("Welcome to the official NTT Global Chat server! type !help for a list of commands");
 
 
