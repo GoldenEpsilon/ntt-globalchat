@@ -28,18 +28,21 @@ global.newLevel = false;
 global.minRunTime = 30;
 
 global.mods = [
-	["gatorboss", "mod", "Blaac's Hard Mode"],
-	["ntte", "mod", "NTTE"],
-	["defpack tools", "mod", "Defpack"],
-	["miscreant", "mod", "Minimod"],
-	["popo", "mod", "Popo"],
-	["vagabonds_master", "mod", "Vagabonds"],
-	["itemlib", "mod", "Risk of Acid Rain"],
-	["NT3D", "mod", "NT3D"],
-	["super hot", "mod", "SUPER HOT"],
-	["nts", "mod", "Nuclear Throne Stupid"],
-	["diceywastelands", "mod", "Dicey Wastelands"],
-	["pvp", "mod", "PvP"]
+	["pvp", "mod", "PvP", "PvP"],
+	["NT3D", "mod", "NT3D", "3D"],
+	["super hot", "mod", "SUPER HOT", "SHot"],
+	["diceywastelands", "mod", "Dicey Wastelands", "DiceW"],
+	["itemlib", "mod", "Risk of Acid Rain", "RoAR"],
+	["gatorboss", "mod", "Blaac's Hard Mode", "B'sHM"],
+	["nts", "mod", "Nuclear Throne Stupid", "NTS"],
+	["ntte", "mod", "NTTE", "TE"],
+	["vagabonds_master", "mod", "Vagabonds", "VagaB"],
+	["miscreant", "mod", "Minimod", "MiniM"],
+	["metamorphosis", "mod", "Metamorphosis", "MetaM"],
+	["defpack tools", "mod", "Defpack", "DefP"],
+	["Rocket Casings", "skill", "Lots O' Muts", "LOM"],
+	["popo", "mod", "Popo", "Popo"],
+	["titank", "mod", "Titank", "TTNK"]
 ]
 
 chat_comp_add("gcip", "Sets your ip for the global chat.");
@@ -88,10 +91,16 @@ if(instance_exists(TopCont) && !instance_exists(Menu) && !instance_exists(Player
 			var dcfc = string_char_at(deathcause, 1);
 			var message = player_get_alias(0) + (player_is_active(1) ? "'s group" : "") + " just got killed by " + ((dcfc=="a"||dcfc=="e"||dcfc=="i"||dcfc=="o"||dcfc=="u") ? "an ": "a ") + deathcause + (actualLoops > 0 ? " in loop " + string(actualLoops) : "") + (UberCont.hardmode ? " in hardmode" : "");
 			var modlist = [];
+			var count = 0;
 			with(global.mods){
 				if(mod_exists(self[1], self[0])){
-					array_push(modlist, self[2]);
+					if(count < 4){
+						array_push(modlist, self[2]);
+					}else{
+						array_push(modlist, self[3]);
+					}
 				}
+				count++;
 			}
 			for(var i = 0; i < array_length(modlist); i++){
 				if(i == 0){
