@@ -29,20 +29,20 @@ global.minRunTime = 30;
 
 global.mods = [
 	["pvp", "mod", "PvP", "PvP"],
-	["NT3D", "mod", "NT3D", "3D"],
-	["super hot", "mod", "SUPER HOT", "SHot"],
-	["diceywastelands", "mod", "Dicey Wastelands", "DiceW"],
+	["NT3D", "mod", "NT3D", "NT3D"],
+	["super hot", "mod", "SUPER HOT", "SUPER HOT"],
+	["diceywastelands", "mod", "Dicey Wastelands", "DiceyW"],
 	["itemlib", "mod", "Risk of Acid Rain", "RoAR"],
-	["gatorboss", "mod", "Blaac's Hard Mode", "B'sHM"],
+	["gatorboss", "mod", "Blaac's Hard Mode", "BlaacMode"],
 	["nts", "mod", "Nuclear Throne Stupid", "NTS"],
 	["ntte", "mod", "NTTE", "TE"],
 	["vagabonds_master", "mod", "Vagabonds", "VagaB"],
-	["miscreant", "mod", "Minimod", "MiniM"],
+	["miscreant", "mod", "Minimod", "Minimod"],
 	["metamorphosis", "mod", "Metamorphosis", "MetaM"],
-	["defpack tools", "mod", "Defpack", "DefP"],
-	["Rocket Casings", "skill", "Lots O' Muts", "LOM"],
+	["defpack tools", "mod", "Defpack", "Defpack"],
+	["Rocket Casings", "skill", "Lots O' Muts", "LO'M"],
 	["popo", "mod", "Popo", "Popo"],
-	["titank", "mod", "Titank", "TTNK"]
+	["titank", "mod", "Titank", "Titank"]
 ]
 
 chat_comp_add("gcip", "Sets your ip for the global chat.");
@@ -99,8 +99,8 @@ if(instance_exists(TopCont) && !instance_exists(Menu) && !instance_exists(Player
 					}else{
 						array_push(modlist, self[3]);
 					}
+					count++;
 				}
-				count++;
 			}
 			for(var i = 0; i < array_length(modlist); i++){
 				if(i == 0){
