@@ -99,7 +99,7 @@ function serverPost(req, res) {
 				let user = Client.logGuild.members.cache.find(user => user.nickname == req.headers.message.split("!ping ")[1]);
 				console.log(Client.logGuild.members.cache);
 				if(user == undefined){
-					user = Client.logGuild.members.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
+					user = Client.logGuild.members.cache.find(user => user.user.username == req.headers.message.split("!ping ")[1]);
 				}
 				if(user != undefined){
 					Client.logChannel.send("<@" + user.id + ">");
