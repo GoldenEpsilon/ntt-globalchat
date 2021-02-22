@@ -35,7 +35,7 @@ if(UsingDiscord){
 		console.log('Logged in as ' + Client.user.tag + '!');
 		Client.logChannel = Client.channels.cache.get(logChannelId);
 		Client.logGuild = Client.guilds.cache.get(logGuildId);
-		Client.logGuild.members.fetch();
+		Client.logGuild.members.fetch().then(members => console.log(members));
 	})
 }
 
