@@ -96,8 +96,9 @@ function serverPost(req, res) {
 			if(UsingDiscord){
 				let user = Client.users.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
 				console.log(req.headers.message.split("!ping ")[1]);
-				console.log(user);
-				if(typeof(user) != undefined){
+				console.log(Client.users.cache);
+				console.log(Client.users.cache.find(user => user.tag == "Golden Epsilon#8656"));
+				if(user != undefined){
 					Client.logChannel.send("<@" + user.id + ">");
 					res.write("@" + req.headers.message.split(" ")[1])
 				}else{
