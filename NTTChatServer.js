@@ -92,16 +92,20 @@ function serverPost(req, res) {
 			res.write("0")
 			res.write('	')
 		}else if(req.headers.message.split(" ")[0] == "!ping"){
-			res.write("@" + req.headers.message.split(" ")[1])
+
+			if(UsingDiscord){
+				if(Client.users.cache.find(user => user.username == req.headers.message.split("!ping ")[1]) != undefined){
+					Client.logChannel.send("<@" + Client.users.cache.find(user => user.username == req.headers.message.split(" ")[1]).id + ">");
+					res.write("@" + req.headers.message.split(" ")[1])
+				}else{
+					res.write("User was not found")
+				}
+			}else{
+				res.write("Bot is not connected to discord")
+			}
 			res.write('	')
 			res.write("0")
 			res.write('	')
-
-			if(UsingDiscord){
-				if(Client.users.cache.find(user => user.username == req.headers.message.split(" ")[1]) != undefined){
-					Client.logChannel.send("<@" + Client.users.cache.find(user => user.username == req.headers.message.split(" ")[1]).id + ">");
-				}
-			}
 		}else if(req.headers.message == "!list"){
 			res.write("Server: ");
 			let first = true;
