@@ -98,7 +98,9 @@ function serverPost(req, res) {
 			res.write('	')
 
 			if(UsingDiscord){
-				Client.logChannel.send("<@" + Client.users.cache.find(user => user.username == req.headers.message.split(" ")[1]).id + ">")
+				if(Client.users.cache.find(user => user.username == req.headers.message.split(" ")[1]) != undefined){
+					Client.logChannel.send("<@" + Client.users.cache.find(user => user.username == req.headers.message.split(" ")[1]).id + ">");
+				}
 			}
 		}else if(req.headers.message == "!list"){
 			res.write("Server: ");
