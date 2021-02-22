@@ -35,7 +35,7 @@ if(UsingDiscord){
 		console.log('Logged in as ' + Client.user.tag + '!');
 		Client.logChannel = Client.channels.cache.get(logChannelId);
 		Client.logGuild = Client.guilds.cache.get(logGuildId);
-		Client.logGuild.members.fetch().then(members => console.log(members))
+		Client.logGuild.members.fetch();
 	})
 }
 
@@ -97,13 +97,13 @@ function serverPost(req, res) {
 		}else if(req.headers.message.split(" ")[0] == "!ping"){
 
 			if(UsingDiscord){
-				let user = Client.users.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
-				console.log(req.headers.message.split("!ping ")[1]);
-				console.log(Client.users.cache);
-				console.log(Client.users.cache.find(user => user.tag == "Golden Epsilon#8656"));
+				let user = Client.logGuild.members.cache.find(user => user.nickname == req.headers.message.split("!ping ")[1]);
+				if(user == undefined){
+					user = Client.logGuild.members.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
+				}
 				if(user != undefined){
 					Client.logChannel.send("<@" + user.id + ">");
-					res.write("@" + req.headers.message.split(" ")[1])
+					res.write("@" + req.headers.message.split("!ping ")[1])
 				}else{
 					res.write("User was not found")
 				}
