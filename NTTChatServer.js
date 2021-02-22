@@ -94,8 +94,11 @@ function serverPost(req, res) {
 		}else if(req.headers.message.split(" ")[0] == "!ping"){
 
 			if(UsingDiscord){
-				if(Client.users.cache.find(user => user.username == req.headers.message.split("!ping ")[1]) != undefined){
-					Client.logChannel.send("<@" + Client.users.cache.find(user => user.username == req.headers.message.split(" ")[1]).id + ">");
+				let user = Client.users.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
+				console.log(req.headers.message.split("!ping ")[1]);
+				console.log(user);
+				if(typeof(user) != undefined){
+					Client.logChannel.send("<@" + user.id + ">");
 					res.write("@" + req.headers.message.split(" ")[1])
 				}else{
 					res.write("User was not found")
