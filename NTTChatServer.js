@@ -24,6 +24,7 @@ var logChannelId;
 if(UsingDiscord){
 	Client       = new Discord.Client({ disableMentions: 'everyone' })
 	logChannelId = "765740608471957526";
+	logGuildId = "765740530205720588";
 }
 
 console.log("Loading up server!");
@@ -33,7 +34,7 @@ if(UsingDiscord){
 	Client.once('ready', () => {
 		console.log('Logged in as ' + Client.user.tag + '!');
 		Client.logChannel = Client.channels.cache.get(logChannelId);
-		getUsers();
+		Client.logGuild = Client.guilds.cache.get(logGuildId);
 	})
 }
 
@@ -50,20 +51,6 @@ const colors           = []
 const discordColor     = '14322034'
 const checkDisconnects = 10000;
 const disconnectTime   = 60000;
-
-//we need to get the users before we can do stuff like ping them
-function getUsers() {
-  let guilds = bot.guilds.array();
-
-  for (let i = 0; i < guilds.length; i++) {
-    bot.guilds.get(guilds[i].id).fetchMembers().then(r => {
-      r.members.array().forEach(r => {
-        let username = `${r.user.username}#${r.user.discriminator}`;
-        //console.log(`${username}`);
-      });
-    });
-  }
-}
 
 //Someone's asking to join!
 function serverGet(req, res) {
@@ -109,10 +96,10 @@ function serverPost(req, res) {
 		}else if(req.headers.message.split(" ")[0] == "!ping"){
 
 			if(UsingDiscord){
-				let user = Client.users.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
+				let user = Client.logGuild.users.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
 				console.log(req.headers.message.split("!ping ")[1]);
-				console.log(Client.users.cache);
-				console.log(Client.users.cache.find(user => user.tag == "Golden Epsilon#8656"));
+				console.log(Client.logGuild.users.cache);
+				console.log(Client.logGuild.users.cache.find(user => user.tag == "Golden Epsilon#8656"));
 				if(user != undefined){
 					Client.logChannel.send("<@" + user.id + ">");
 					res.write("@" + req.headers.message.split(" ")[1])
