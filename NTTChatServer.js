@@ -96,10 +96,10 @@ function serverPost(req, res) {
 		}else if(req.headers.message.split(" ")[0] == "!ping"){
 
 			if(UsingDiscord){
-				let user = Client.logGuild.users.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
+				let user = Client.logGuild.members.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
 				console.log(req.headers.message.split("!ping ")[1]);
-				console.log(Client.logGuild.users.cache);
-				console.log(Client.logGuild.users.cache.find(user => user.tag == "Golden Epsilon#8656"));
+				console.log(Client.logGuild.members.cache);
+				console.log(Client.logGuild.members.cache.find(user => user.tag == "Golden Epsilon#8656"));
 				if(user != undefined){
 					Client.logChannel.send("<@" + user.id + ">");
 					res.write("@" + req.headers.message.split(" ")[1])
