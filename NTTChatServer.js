@@ -87,15 +87,19 @@ function serverPost(req, res) {
 
 	if (req.headers.message) {
 		if(req.headers.message == "!help"){
-			res.write("Server: Commands: !help !ping !list")
+			res.write("Server: Commands: !help, !ping (username), !list")
 			res.write('	')
 			res.write("0")
 			res.write('	')
-		}else if(req.headers.message == "!ping"){
-			res.write("Server: Pong")
+		}else if(req.headers.message.split(" ")[0] == "!ping"){
+			res.write("@" + req.headers.message.split(" ")[1])
 			res.write('	')
 			res.write("0")
 			res.write('	')
+
+			if(UsingDiscord){
+				Client.logChannel.send("<@" + Client.users.cache.find(user => user.username == req.headers.message.split(" ")[1]).id + ">")
+			}
 		}else if(req.headers.message == "!list"){
 			res.write("Server: ");
 			let first = true;
