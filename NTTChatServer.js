@@ -95,9 +95,9 @@ function serverPost(req, res) {
 			res.write("0")
 			res.write('	')
 		}else if(req.headers.message.split(" ")[0] == "!ping"){
-
 			if(UsingDiscord){
 				let user = Client.logGuild.members.cache.find(user => user.nickname == req.headers.message.split("!ping ")[1]);
+				console.log(Client.logGuild.members.cache);
 				if(user == undefined){
 					user = Client.logGuild.members.cache.find(user => user.username == req.headers.message.split("!ping ")[1]);
 				}
