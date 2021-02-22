@@ -31,8 +31,9 @@ console.log("Loading up server!");
 if(UsingDiscord){
 	//Discord startup
 	Client.once('ready', () => {
-		console.log('Logged in as ' + Client.user.tag + '!')
-		Client.logChannel = Client.channels.cache.get(logChannelId)
+		console.log('Logged in as ' + Client.user.tag + '!');
+		Client.logChannel = Client.channels.cache.get(logChannelId);
+		getUsers();
 	})
 }
 
@@ -49,6 +50,20 @@ const colors           = []
 const discordColor     = '14322034'
 const checkDisconnects = 10000;
 const disconnectTime   = 60000;
+
+//we need to get the users before we can do stuff like ping them
+function getUsers() {
+  let guilds = bot.guilds.array();
+
+  for (let i = 0; i < guilds.length; i++) {
+    bot.guilds.get(guilds[i].id).fetchMembers().then(r => {
+      r.members.array().forEach(r => {
+        let username = `${r.user.username}#${r.user.discriminator}`;
+        //console.log(`${username}`);
+      });
+    });
+  }
+}
 
 //Someone's asking to join!
 function serverGet(req, res) {
