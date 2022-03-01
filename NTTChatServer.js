@@ -200,7 +200,7 @@ if(UsingDiscord){
 
 if(UsingDiscord){
 	//Log in discord client
-	Client.login("NzY0NTY0NzkxNzkxNzE0MzM0.X4IGcw.es3GwUB7BRkQMWwlN7JGDMQ4qek")
+	Client.login("NzY0NTY0NzkxNzkxNzE0MzM0.X4IGcw.pdMr0vwgipXyRktYIq7PUTUGa2M")
 }
 
 console.log("Finished loading!");
